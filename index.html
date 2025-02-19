@@ -4,50 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mājaslapa</title>
-    <link href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/main.css">
 </head>
 <body>
-    <nav class="navbar background">
-        <!-- logo-->
-        <div class="logo">
-            <img src=""
-                alt="logo">
-        </div>
-        <!-- menu-->
-        <ul class="nav-list">
-            <li><a href="#plant">Plant</a></li>
-            <li><a href="#favorite-plant"></a>Mans mīļākais plant</li>
-            <li><a href="#mini-game">water the plant</a></li> <!-- section, kur bus pirma izvele artistu un pēc tā artista albumi un izvele mīļāko-->
-            <li><a href="#avoti">plant</a></li>
-        </ul>
+    <nav>
+        <a href="#hero">Home</a>
+        <a href="#info">About</a>
+        <a href="#facts">Cat Facts</a>
+        <a href="#blackhole-game">Black Hole</a>
+        <a href="#contact">Contact</a>
     </nav>
+    
     <section id="hero">
-        <div class="box-main">
-            <div class="firstHalf">
-                <p></p>
-                <img src="">
-                <img src="">
-                <button>Learn more</button>
-            </div>
-        </div> 
+        <h1>Welcome to the Black Hole</h1>
+        <p>Dive into the cosmic mystery</p>
     </section>
-    <section id="plant">
 
+    <section id="info">
+        <h2>Kas ir melnais caurums?</h2>
+        <p>Melnais caurums ir reģions kosmosā, kur gravitācija ir tik spēcīga, ka nekas, pat gaisma, nevar no tā izkļūt. Tas veidojas, kad ļoti masīva zvaigzne eksplodē supernovas sprādzienā un tās kodols sabrūk pašā sevī. Tā rezultātā veidojas objekts ar milzīgu gravitācijas spēku, kas izmaina laiktelpu ap sevi.</p>
     </section>
-    <section id="favorite-plant">
 
+    <section id="facts">
+        <h2>Nejaušs fakts par kaķiem</h2>
+        <p id="cat-fact">Uzspiediet pogu, lai uzzināt citu faktu</p>
+        <button onclick="getCatFact()">Cits fakts</button>
     </section>
-    <section id="mini-game">
-        <h1>Water the plant before it dies!</h1>
-        <img id="plant" src="src/images/plant_foto.png" alt="Plant">
-        <p id="message">The plant is happy 😊</p>
-        <button id="water-btn">Water 🌱💧</button>
-        
-        <script src="src/js/main.js"></script>
-    </section>
-    <section id="avoti">
 
+    <section id="blackhole-game">
+        <h2>Pamēģini, kā strāda melns caurums</h2>
+        <div class="black-hole" id="black-hole"></div>
+        <div class="draggable" draggable="true" id="box1">Box 1</div>
+        <div class="draggable" draggable="true" id="box2">Box 2</div>
+        <button onclick="restoreObjects()">Restore Objects</button>
     </section>
-    <footer>&copy; Denchik</footer>
+
+    <section id="contact">
+        <h2>Kontakti</h2>
+        <p>Email: A230224DB@rvt.lv</p>
+    </section>
+
+    <script src="src/js/main.js"></script>
 </body>
 </html>

@@ -1,26 +1,40 @@
-let health = 100; // Plant health
-        let plant = document.getElementById("plant");
-        let message = document.getElementById("message");
-        let button = document.getElementById("water-btn");
+async function getCatFact() {
+    const response = await fetch('https://catfact.ninja/fact');
+    const data = await response.json();
+    document.getElementById('cat-fact').innerText = data.fact;
+}
 
-        function decay() {
-            if (health > 0) {
-                health -= 10;
-                plant.style.filter = `brightness(${health}%)`;
-                message.innerText = health > 50 ? "The plant looks sad 😟" : "The plant is wilting! 😢";
-                
-                if (health <= 0) {
-                    message.innerText = "The plant has died... 😭";
-                    document.body.innerHTML = "<h1>You didn't water the plant... 💀</h1>";
-                }
-            }
-        }
+const blackHole = document.getElementById("black-hole");
+const boxes = document.querySelectorAll(".draggable");
+let hiddenBoxes = [];
 
-        function waterPlant() {
-            health = Math.min(100, health + 20); // Restore health, but not over 100
-            plant.style.filter = `brightness(${health}%)`;
-            message.innerText = "The plant is happy again! 😊";
-        }
+boxes.forEach(box => {
+    box.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text", e.target.id);
+    });
+});
 
-        button.addEventListener("click", waterPlant);
-        setInterval(decay, 1000); // Plant wilts every 10 seconds
+blackHole.addEventListener("dragover", (e) => {
+    e.preventDefault();
+});
+
+blackHole.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData("text");
+    const box = document.getElementById(id);
+    hiddenBoxes.push(box);
+    const rect = blackHole.getBoundingClientRect();
+    box.style.position = "absolute";
+    box.style.left = `${rect.left + rect.width / 2 - 50}px`;
+    box.style.top = `${rect.top + rect.height / 2 - 50}px`;
+    box.classList.add("sucked-in");
+    setTimeout(() => box.style.display = "none", 3000);
+});
+
+function restoreObjects() {
+    hiddenBoxes.forEach(box => {
+        box.style.display = "flex";
+        box.classList.remove("sucked-in");
+    });
+    hiddenBoxes = [];
+}
