@@ -5,114 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Melnais Caurums</title>
     <link rel="stylesheet" href="src/css/main.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #111;
-            color: white;
-            margin: 0;
-        }
-        nav {
-            background: #222;
-            padding: 10px 20px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 20px;
-        }
-        nav img {
-            height: 40px;
-            margin-right: 20px;
-        }
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        #hero {
-            background-image: url('https://www.reuters.com/resizer/v2/YBYLT7AZNVMJXMIRMPCQJRR3FU.jpg?auth=07492d0d546552feec1f4cf5d3d01ffd0f7f3ecbce4284cb42f0e456e5b97247&width=1920&quality=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-shadow: 2px 2px 5px black;
-            filter: brightness(0.7);
-        }
-        .game-container {
-            position: relative;
-            height: 400px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #222;
-        }
-        .black-hole {
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(0,0,0,0.8) 30%, rgba(0,0,0,1) 60%);
-            border-radius: 50%;
-            position: absolute;
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
-        }
-        .draggable {
-            width: 100px;
-            height: 100px;
-            background-size: cover;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            cursor: grab;
-            border-radius: 10px;
-        }
-        #box1 { 
-            top: 100px; 
-            left: 30%; 
-            background-image: url('src/images/welcome.jpg');
-        }
-        #box2 { 
-            bottom: 100px; 
-            right: 30%; 
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/800px-Banana-Single.jpg');
-        }
-        button {
-            padding: 10px 20px;
-            margin-top: 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background: #ff6600;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        .sucked-in {
-            animation: suckIntoBlackHole 3s forwards;
-        }
-        @keyframes suckIntoBlackHole {
-            0% { transform: scale(1) rotate(0deg); opacity: 1; }
-            50% { transform: scale(0.5) rotate(180deg) translate(50px, 50px); opacity: 0.7; }
-            100% { transform: scale(0) rotate(720deg) translate(0, 0); opacity: 0; }
-        }
-    </style>
+    <link rel="icon" type="image/x-icon" href="src/images/black_hole_logo.svg">
 </head>
 <body>
     <header>
         <nav>
-            <img src="src/images/black_hole_logo.gif" alt="Logo">
+            <img src="src/images/black_hole_logo.svg" alt="Logo">
             <div class="nav-links">
                 <a href="#hero">Sākums</a>
                 <a href="#info">Melnais caurums</a>
@@ -137,46 +35,7 @@
         </div>
         <button onclick="restoreObjects()">Atjaunot objektus</button>
     </section>
-
-    <script>
-        const blackHole = document.getElementById("black-hole");
-        const boxes = document.querySelectorAll(".draggable");
-        let hiddenBoxes = [];
-        let originalPositions = {};
-
-        boxes.forEach(box => {
-            originalPositions[box.id] = { left: box.style.left, top: box.style.top };
-            box.addEventListener("dragstart", (e) => {
-                e.dataTransfer.setData("text", e.target.id);
-            });
-        });
-
-        blackHole.addEventListener("dragover", (e) => {
-            e.preventDefault();
-        });
-
-        blackHole.addEventListener("drop", (e) => {
-            e.preventDefault();
-            const id = e.dataTransfer.getData("text");
-            const box = document.getElementById(id);
-            hiddenBoxes.push(box);
-            box.style.position = "absolute";
-            box.style.left = "50%";
-            box.style.top = "50%";
-            box.style.transform = "translate(-50%, -50%)";
-            box.classList.add("sucked-in");
-            setTimeout(() => box.style.display = "none", 3000);
-        });
-
-        function restoreObjects() {
-            hiddenBoxes.forEach(box => {
-                box.style.display = "block";
-                box.style.left = originalPositions[box.id].left;
-                box.style.top = originalPositions[box.id].top;
-                box.classList.remove("sucked-in");
-            });
-            hiddenBoxes = [];
-        }
-    </script>
+    <footer>&copy; Deniss Bukovskis</footer>
+    <script src="src/js/main.js"></script>
 </body>
 </html>

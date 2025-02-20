@@ -7,8 +7,14 @@ async function getCatFact() {
 const blackHole = document.getElementById("black-hole");
 const boxes = document.querySelectorAll(".draggable");
 let hiddenBoxes = [];
+let originalPositions = {};
 
 boxes.forEach(box => {
+    const computedStyle = getComputedStyle(box);
+    originalPositions[box.id] = { 
+        left: computedStyle.left, 
+        top: computedStyle.top 
+    };
     box.addEventListener("dragstart", (e) => {
         e.dataTransfer.setData("text", e.target.id);
     });
@@ -23,10 +29,10 @@ blackHole.addEventListener("drop", (e) => {
     const id = e.dataTransfer.getData("text");
     const box = document.getElementById(id);
     hiddenBoxes.push(box);
-    const rect = blackHole.getBoundingClientRect();
     box.style.position = "absolute";
-    box.style.left = `${rect.left + rect.width / 2 - 50}px`;
-    box.style.top = `${rect.top + rect.height / 2 - 50}px`;
+    box.style.left = "50%";
+    box.style.top = "50%";
+    box.style.transform = "translate(-50%, -50%)";
     box.classList.add("sucked-in");
     setTimeout(() => box.style.display = "none", 3000);
 });
@@ -34,6 +40,10 @@ blackHole.addEventListener("drop", (e) => {
 function restoreObjects() {
     hiddenBoxes.forEach(box => {
         box.style.display = "flex";
+        box.style.opacity = "1";
+        box.style.transform = "none";
+        box.style.left = originalPositions[box.id].left;
+        box.style.top = originalPositions[box.id].top;
         box.classList.remove("sucked-in");
     });
     hiddenBoxes = [];
