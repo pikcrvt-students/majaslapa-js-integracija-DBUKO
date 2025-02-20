@@ -21,6 +21,11 @@ nav a {
     text-decoration: none;
     font-size: 18px;
 }
+#hero {
+    background-image: url(https://science.nasa.gov/wp-content/uploads/2020/10/sub-warped-gaia-000000-14x5-1.webp);
+    background-size: cover;
+   
+}
 section {
     padding: 80px 20px;
     border-bottom: 2px solid #222;
