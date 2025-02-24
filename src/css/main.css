@@ -136,6 +136,11 @@ button:hover {
     right: 30%; 
     background-image: url('../images/bear.png');
 }
+#box3 {
+    bottom: 100px;
+    right: 10%;
+    background-image: url('../images/igors.png');
+}
 .sucked-in {
     animation: suckIntoBlackHole 3s forwards;
 }
